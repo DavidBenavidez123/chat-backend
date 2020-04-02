@@ -26,7 +26,7 @@ router.get('/users', (req, res) => {
         .catch(err => {
             res.send({ err })
         })
-        
+
 })
 
 router.post('/register', (req, res) => {
@@ -75,8 +75,8 @@ router.post('/login', (req, res) => {
         .first()
         .then(user => {
             if (user && bcrypt.compareSync(creds.password, user.password)) {
-                // const token = generateToken(user); // new line
-                res.status(200).json({ welcome: user.username});
+                const token = generateToken(user); // new line
+                res.status(200).json({ token });
             } else {
                 res.status(401).json({ message: 'you shall not pass!' });
             }
