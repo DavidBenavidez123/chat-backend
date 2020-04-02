@@ -58,7 +58,6 @@ router.post('/register', (req, res) => {
 })
 
 router.post('/login', (req, res) => {
-  
     const creds = req.body;
     db('users')
         .where({ username: creds.username })
@@ -66,13 +65,13 @@ router.post('/login', (req, res) => {
         .then(user => {
             if (user && bcrypt.compareSync(creds.password, user.password)) {
                 const token = generateToken(user); // new line
-                res.json({ welcome: user.username, token });
+                res.status(200).json({ welcome: user.username, token });
             } else {
-                res.json({ message: 'Incorrect Password or email' });
+                res.status(401).json({ message: 'you shall not pass!' });
             }
         })
         .catch(err => {
-            res.json({ err });
+            res.status(500).json({ err });
         });
 })
 
