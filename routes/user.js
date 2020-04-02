@@ -81,6 +81,7 @@ router.post('/user/login', (req, res) => {
             //     res.status(401).json({ message: 'you shall not pass!' });
             // }
             console.log(user)
+            res.json({ user });
         })
         .catch(err => {
             res.json({ err: 'error loggin in' });
