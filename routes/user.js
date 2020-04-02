@@ -18,6 +18,17 @@ router.get('/', (req, res) => {
     res.send('hello')
 })
 
+router.get('/users', (req, res) => {
+    db('users')
+        .then(users => {
+            res.send({ users })
+        })
+        .catch(err => {
+            res.send({ err })
+        })
+        
+})
+
 router.post('/register', (req, res) => {
     const credentials = req.body;
     const hash = bcrypt.hashSync(credentials.password, 10);
@@ -71,7 +82,7 @@ router.post('/login', (req, res) => {
             }
         })
         .catch(err => {
-            res.json({ err:'error loggin in' });
+            res.json({ err: 'error loggin in' });
         });
 })
 
