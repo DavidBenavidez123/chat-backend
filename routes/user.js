@@ -26,7 +26,7 @@ router.get('/users', (req, res) => {
         .catch(err => {
             res.send({ err })
         })
-        
+
 })
 
 router.post('/register', (req, res) => {
@@ -68,7 +68,7 @@ router.post('/register', (req, res) => {
         });
 })
 
-router.post('/login', (req, res) => {
+router.post('/user/login', (req, res) => {
     const creds = req.body;
     db('users')
         .where({ username: creds.username })
