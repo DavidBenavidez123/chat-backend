@@ -26,7 +26,7 @@ router.get('/users', (req, res) => {
         .catch(err => {
             res.send({ err })
         })
-
+        
 })
 
 router.post('/register', (req, res) => {
@@ -68,21 +68,18 @@ router.post('/register', (req, res) => {
         });
 })
 
-router.post('/user/login', (req, res) => {
+router.post('/login', (req, res) => {
     const creds = req.body;
     db('users')
         .where({ username: creds.username })
         .first()
         .then(user => {
-            // if (user && bcrypt.compareSync(creds.password, user.password)) {
-            //     const token = generateToken(user); // new line
-            //     res.json({ welcome: user.username, token });
-            // }
-            // } else {
-            //     res.status(401).json({ message: 'you shall not pass!' });
-            // }
-            console.log(user)
-            res.json({ user: bcrypt.compareSync(creds.password, user.password), me: user.password });
+            if (user && bcrypt.compareSync(creds.password, user.password)) {
+                // const token = generateToken(user); // new line
+                res.status(200).json({ welcome: user.username});
+            } else {
+                res.status(401).json({ message: 'you shall not pass!' });
+            }
         })
         .catch(err => {
             res.json({ err: 'error loggin in' });
