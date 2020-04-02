@@ -1,6 +1,7 @@
 // Update with your config settings.
 
 module.exports = {
+
   development: {
     client: 'sqlite3',
     connection: {
@@ -13,11 +14,12 @@ module.exports = {
   },
 
   staging: {
-    client: 'postgresql',
+    client: 'pg',
     connection: {
-      database: 'ec2-34-233-186-251.compute-1.amazonaws.com',
-      user: 'frneftcvosqcms',
-      password: '37ea7e005bc8b70bdde432d34dce240e2cc5a66324a8a8f3c1278109accca6cc'
+      database: 'my_db',
+      user: process.env.USER,
+      password: process.env.PASSWORD,
+      DATABASE_URL: process.env.DATABASE_URL
     },
     pool: {
       min: 2,
@@ -29,11 +31,12 @@ module.exports = {
   },
 
   production: {
-    client: 'postgresql',
+    client: 'pg',
     connection: {
-      database: 'ec2-34-233-186-251.compute-1.amazonaws.com',
-      user: 'frneftcvosqcms',
-      password: '37ea7e005bc8b70bdde432d34dce240e2cc5a66324a8a8f3c1278109accca6cc'
+      database: 'my_db',
+      user: process.env.USER,
+      password: process.env.PASSWORD,
+      DATABASE_URL: process.env.DATABASE_URL
     },
     pool: {
       min: 2,
@@ -43,5 +46,5 @@ module.exports = {
       tableName: 'knex_migrations'
     }
   }
-
 };
+console.log(process.env.PASSWORD)
