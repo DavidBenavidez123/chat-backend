@@ -94,7 +94,7 @@ router.get('/userData', (req, res) => {
     const authHeader = req.headers.authorization;
     const token = authHeader
     if (token) {
-        jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
+        jwt.verify(token, jwtSecret, (err, decodedToken) => {
             if (err) {
                 // token verification failed
                 res.json({ message: 'invalid token' });
