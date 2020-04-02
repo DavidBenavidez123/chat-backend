@@ -5,6 +5,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 require('dotenv').config()
 
+const jwtSecret = 'nobody tosses a dwarf!';
+
 function generateToken(user) {
     const jwtPayload = {
         ...user
@@ -12,7 +14,7 @@ function generateToken(user) {
     const jwtOptions = {
         expiresIn: '1h'
     };
-    return jwt.sign(jwtPayload, process.env.JWT_SECRET, jwtOptions);
+    return jwt.sign(jwtPayload, jwtSecret, jwtOptions);
 }
 router.get('/', (req, res) => {
     res.send('hello')
@@ -26,8 +28,10 @@ router.get('/users', (req, res) => {
         .catch(err => {
             res.send({ err })
         })
-
+        
 })
+
+
 
 router.post('/register', (req, res) => {
     const credentials = req.body;
@@ -76,7 +80,7 @@ router.post('/login', (req, res) => {
         .then(user => {
             if (user && bcrypt.compareSync(creds.password, user.password)) {
                 const token = generateToken(user); // new line
-                res.status(200).json({ token });
+                res.status(200).json({ welcome: user.username, token });
             } else {
                 res.status(401).json({ message: 'you shall not pass!' });
             }
