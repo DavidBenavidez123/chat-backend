@@ -65,6 +65,8 @@ jspm_packages/
 # TypeScript v1 declaration files
 typings/
 
+.env
+
 # TypeScript cache
 *.tsbuildinfo
 
