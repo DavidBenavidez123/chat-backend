@@ -36,8 +36,6 @@ router.post('/scroll', (req, res) => {
         })
 })
 
-
-
 function authorizationMiddleware(req, res, next) {
     const authHeader = req.body.headers.Authorization;
     const token = authHeader
