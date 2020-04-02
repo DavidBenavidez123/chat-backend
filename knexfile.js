@@ -15,7 +15,7 @@ module.exports = {
   staging: {
     client: 'postgresql',
     connection: {
-      database: 'dcaqs1e7hlgmbe',
+      database: 'ec2-34-233-186-251.compute-1.amazonaws.com',
       user: 'frneftcvosqcms',
       password: '37ea7e005bc8b70bdde432d34dce240e2cc5a66324a8a8f3c1278109accca6cc'
     },
@@ -24,14 +24,14 @@ module.exports = {
       max: 10
     },
     migrations: {
-      tableName: './database/migrations'
+      tableName: 'knex_migrations'
     }
   },
 
   production: {
     client: 'postgresql',
     connection: {
-      database: 'dcaqs1e7hlgmbe',
+      database: 'ec2-34-233-186-251.compute-1.amazonaws.com',
       user: 'frneftcvosqcms',
       password: '37ea7e005bc8b70bdde432d34dce240e2cc5a66324a8a8f3c1278109accca6cc'
     },
@@ -40,7 +40,7 @@ module.exports = {
       max: 10
     },
     migrations: {
-      tableName: './database/migrations'
+      tableName: 'knex_migrations'
     }
   }
 
