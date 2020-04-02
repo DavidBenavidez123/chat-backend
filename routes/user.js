@@ -74,12 +74,13 @@ router.post('/user/login', (req, res) => {
         .where({ username: creds.username })
         .first()
         .then(user => {
-            if (user && bcrypt.compareSync(creds.password, user.password)) {
-                const token = generateToken(user); // new line
-                res.status(200).json({ welcome: user.username, token });
-            } else {
-                res.status(401).json({ message: 'you shall not pass!' });
-            }
+            // if (user && bcrypt.compareSync(creds.password, user.password)) {
+            //     const token = generateToken(user); // new line
+            //     res.status(200).json({ welcome: user.username, token });
+            // } else {
+            //     res.status(401).json({ message: 'you shall not pass!' });
+            // }
+            console.log(user)
         })
         .catch(err => {
             res.json({ err: 'error loggin in' });
