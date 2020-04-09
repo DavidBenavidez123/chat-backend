@@ -1,11 +1,9 @@
-
 const express = require('express');
 const router = express.Router();
 const db = require('../database/dbConfig')
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 require('dotenv').config()
-
 
 router.get('/', (req, res) => {
     db('messages')
@@ -33,6 +31,27 @@ router.post('/scroll', (req, res) => {
         })
         .catch(err => {
             res.send({ err })
+        })
+})
+
+router.put('/update', (req, res) => {
+    const { message, messages_id } = req.body
+    db('messages')
+        .where('messages_id', messages_id)
+        .update({ message: message })
+        .then(text => {
+            return db('messages')
+                .where('messages_id', text[0])
+                .then(text => {
+                    console.log(text[0])
+                    res.json('sending message', text[0]);
+                })
+                .catch(err => {
+                    res.json(err);
+                })
+        })
+        .catch(err => {
+            res.json(err);
         })
 })
 

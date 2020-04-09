@@ -24,6 +24,30 @@ module.exports = function (io) {
                     io.emit(err);
                 })
         })
+        socket.on('updating message', function (msg) {
+            const message = msg.text
+            const messageId = msg.id
+            db('messages')
+                .where('messages_id', messageId)
+                .update({ message: message })
+                .then(text => {
+                    io.emit('updating message', msg);
+                })
+                .catch(err => {
+                    io.emit(err);
+                })
+        })
+        socket.on('deleting message', function (id) {
+            db('messages')
+                .where('messages_id', id)
+                .delete()
+                .then(text => {
+                    io.emit('deleting message', id);
+                })
+                .catch(err => {
+                    io.emit(err);
+                })
+        })
     })
 };
 
