@@ -18,6 +18,32 @@ router.get('/', (req, res) => {
         })
 })
 
+router.get('/:room/messages', (req, res) => {
+    db('rooms')
+        .where({ room_name: req.params.room })
+        .then(room => {
+            if (room && room.length) {
+                return db('messages')
+                    .where('room_id', room[0].room_name)
+                    .orderBy('created_at', 'desc')
+                    .limit(10)
+                    .then(messages => {
+                        messages.reverse()
+                        res.send({ messages })
+                    })
+                    .catch(err => {
+                        res.send({ err })
+                    })
+            } else {
+                res.json({ room: 'empty' })
+            }
+        })
+        .catch(err => {
+            res.send({ err })
+        })
+})
+
+
 router.post('/scroll', (req, res) => {
     const { data } = req.body
     console.log(data)

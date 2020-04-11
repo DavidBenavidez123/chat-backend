@@ -32,7 +32,6 @@ router.get('/users', (req, res) => {
 })
 
 
-
 router.post('/register', (req, res) => {
     const credentials = req.body;
     const hash = bcrypt.hashSync(credentials.password, 10);

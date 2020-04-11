@@ -6,6 +6,10 @@ exports.up = function (knex) {
             .references('users_id')
             .inTable('users');
         messages
+            .integer('room_id')
+            .references('room_id')
+            .inTable('rooms');
+        messages
             .string('message')
             .notNullable()
         messages
