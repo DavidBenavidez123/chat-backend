@@ -27,10 +27,8 @@ router.get('/users', (req, res) => {
         })
         .catch(err => {
             res.send({ err })
-        })
-        
+        })    
 })
-
 
 router.post('/register', (req, res) => {
     const credentials = req.body;

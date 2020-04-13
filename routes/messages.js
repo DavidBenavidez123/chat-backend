@@ -20,11 +20,11 @@ router.get('/', (req, res) => {
 
 router.get('/:room/messages', (req, res) => {
     db('rooms')
-        .where({ room_name: req.params.room })
+        .where({ name: req.params.room })
         .then(room => {
             if (room && room.length) {
                 return db('messages')
-                    .where('room_id', room[0].room_name)
+                    .where('room_id', room[0].name)
                     .orderBy('created_at', 'desc')
                     .limit(10)
                     .then(messages => {
@@ -45,9 +45,9 @@ router.get('/:room/messages', (req, res) => {
 
 
 router.post('/scroll', (req, res) => {
-    const { data } = req.body
-    console.log(data)
+    const { data, room } = req.body
     db('messages')
+    .where('room_id', room)
         .orderBy('created_at', 'desc')
         .limit(10)
         .offset(data)

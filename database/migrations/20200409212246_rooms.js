@@ -3,7 +3,7 @@ exports.up = function (knex) {
     return knex.schema.createTable('rooms', rooms => {
         rooms.increments('room_id');
         rooms
-            .string('room_name')
+            .string('name')
             .notNullable()
     });
 };
